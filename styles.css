@@ -1,29 +1,29 @@
 /* ============================================================
    Murteza Mir Jaylany — murtezamirjaylany.com
    Palette and structure drawn from FAA sectional chart
-   convention: Class C magenta, Class B blue, night panel.
+   convention adapted to a night panel: amber caution, green ground.
    ============================================================ */
 
 :root{
   /* surfaces */
-  --void:      #04080E;   /* night instrument panel   */
-  --panel:     #0A1420;   /* raised panel             */
-  --chart:     #E9EEF2;   /* chart paper (cool)       */
+  --void:      #04120B;   /* deep forest panel        */
+  --panel:     #081F13;   /* raised panel             */
+  --chart:     #EDF2EE;   /* chart paper (cool)       */
 
   /* ink */
-  --paper:     #E7EDF4;
-  --ink:       #08111C;
-  --dim-d:     #93A5BA;
-  --dim-l:     #4C5D71;
+  --paper:     #E4EFE7;
+  --ink:       #06140C;
+  --dim-d:     #8FAD9A;
+  --dim-l:     #4A5F51;
 
   /* hairlines */
-  --rule-d:    #18242F;
-  --rule-l:    #C9D4DD;
+  --rule-d:    #16301F;
+  --rule-l:    #CBD8CE;
 
   /* signal */
-  --mag:       #FF3F9A;   /* Class C magenta          */
-  --mag-deep:  #C21A6E;   /* magenta for light bands  */
-  --blue:      #4C86F0;   /* Class B blue, line work  */
+  --mag:       #FFB627;   /* caution amber, signal    */
+  --mag-deep:  #8A5600;   /* amber for light bands    */
+  --blue:      #4FB3A0;   /* teal, chart line work    */
 
   --sans: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --code: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -66,7 +66,7 @@ svg{ display:block; }
 
 .skip{
   position:absolute; left:-9999px; top:10px; z-index:200;
-  background: var(--mag); color:#fff; padding:10px 16px; font-weight:600;
+  background: var(--mag); color:#141001; padding:10px 16px; font-weight:600;
 }
 .skip:focus{ left:12px; }
 
@@ -141,13 +141,61 @@ section[id]{ scroll-margin-top: 84px; }
   align-items: start;
 }
 
+/* hero identity plate — face first, per reference */
+.ident-plate{
+  display:flex; align-items:center; gap:18px;
+  padding:18px; border-bottom:1px solid var(--rule-d);
+}
+.ident-plate img{
+  display:block; width:84px; height:84px; flex:none;
+  object-fit:cover; border:1px solid #22402D;
+}
+.ident-plate b{ display:block; font-size:1.02rem; letter-spacing:-.015em; }
+.ident-plate span{ display:block; margin-top:3px; color:var(--dim-d); font-size:.7rem; }
+
+/* About: hard facts, scannable */
+.facts{ margin:clamp(30px,3.6vw,44px) 0 0; max-width:400px; border-top:1px solid var(--rule); }
+.facts div{
+  display:grid; grid-template-columns:112px minmax(0,1fr); gap:16px;
+  padding:11px 0; border-bottom:1px solid var(--rule); align-items:baseline;
+}
+.facts dt{ font-family:var(--code); font-size:.72rem; color:var(--fg-dim); }
+.facts dd{ margin:0; font-size:.94rem; font-weight:500; }
+
+/* Recommendations */
+.quotes{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); }
+.quote{ margin:0; background:var(--cell-bg); padding:clamp(24px,2.4vw,32px);
+  display:flex; flex-direction:column; }
+.quote blockquote{ margin:0 0 22px; }
+.quote p{ margin:0; color:var(--fg-dim); font-size:.95rem; }
+.quote figcaption{ margin-top:auto; padding-top:18px; border-top:2px solid var(--acc); }
+.quote b{ display:block; font-size:.95rem; }
+.quote figcaption span{ display:block; color:var(--fg-dim); font-size:.84rem; margin-top:2px; }
+
+/* Contact form */
+.form{ display:grid; gap:7px; }
+.form label{ font-family:var(--code); font-size:.72rem; color:var(--dim-d); margin-top:8px; }
+.form select, .form textarea{
+  width:100%; font:inherit; font-size:.94rem; color:var(--paper);
+  background:var(--panel); border:1px solid var(--rule-d); border-radius:2px;
+  padding:11px 13px;
+}
+.form textarea{ resize:vertical; min-height:96px; }
+.form select:focus-visible, .form textarea:focus-visible{ border-color:var(--mag); }
+.form .btn{ margin-top:12px; }
+.microcopy{ font-size:.68rem; color:#6E8095; margin:6px 0 0; }
+
+/* ============================================================
+   MASTHEAD
+
 /* ============================================================
    MASTHEAD
    ============================================================ */
 
 .masthead{
   position: sticky; top:0; z-index:100;
-  background: rgba(4,8,14,.82);
+  background: rgba(4,18,11,.84);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--rule-d);
@@ -202,7 +250,7 @@ section[id]{ scroll-margin-top: 84px; }
 }
 .hero__status .dot{
   width:7px; height:7px; border-radius:50%; flex:none;
-  background:var(--mag); box-shadow:0 0 0 4px rgba(255,63,154,.14);
+  background:var(--mag); box-shadow:0 0 0 4px rgba(255,182,39,.14);
 }
 
 .hero__title{
@@ -229,8 +277,8 @@ section[id]{ scroll-margin-top: 84px; }
   border:1px solid transparent;
   transition: background-color .18s ease, border-color .18s ease, color .18s ease;
 }
-.btn--solid{ background:var(--mag); color:#fff; }
-.btn--solid:hover{ background:#ff5fab; }
+.btn--solid{ background:var(--mag); color:#141001; }
+.btn--solid:hover{ background:#ffc555; }
 .btn--ghost{ border-color:var(--rule-d); color:var(--paper); }
 .btn--ghost:hover{ border-color:var(--mag); color:var(--mag); }
 .band--chart .btn--ghost{ border-color:var(--rule-l); color:var(--ink); }
@@ -240,7 +288,7 @@ section[id]{ scroll-margin-top: 84px; }
 .scope{
   border:1px solid var(--rule-d);
   background:
-    linear-gradient(180deg, rgba(76,134,240,.05), rgba(4,8,14,0) 42%),
+    linear-gradient(180deg, rgba(79,179,160,.05), rgba(4,18,11,0) 42%),
     var(--panel);
 }
 .scope__head{
@@ -260,8 +308,8 @@ section[id]{ scroll-margin-top: 84px; }
 
 .scope__plot{ width:100%; height:auto; }
 .scope__rings circle{ fill:none; stroke:var(--rule-d); stroke-width:1; }
-.scope__rings circle:first-child{ stroke:#22323F; }
-.scope__ticks path{ stroke:#2A3C4B; stroke-width:1.4; stroke-linecap:round; }
+.scope__rings circle:first-child{ stroke:#22402D; }
+.scope__ticks path{ stroke:#2F4E3A; stroke-width:1.4; stroke-linecap:round; }
 .scope__cross{ stroke:var(--rule-d); stroke-width:1; stroke-dasharray:2 6; }
 
 .scope__sweep{
@@ -277,7 +325,7 @@ section[id]{ scroll-margin-top: 84px; }
 .readout li{
   display:flex; justify-content:space-between; gap:12px; align-items:baseline;
   padding:6px 9px;
-  background: rgba(76,134,240,.055);
+  background: rgba(79,179,160,.06);
   border-left:2px solid var(--mag);
   font-size:.72rem;
 }
@@ -286,7 +334,7 @@ section[id]{ scroll-margin-top: 84px; }
 
 .scope__foot{
   padding:12px 18px; border-top:1px solid var(--rule-d);
-  color:#6E8095; font-size:.7rem;
+  color:#7A9686; font-size:.7rem;
 }
 
 /* JS-enhanced reveal — without JS everything is simply visible */
@@ -346,7 +394,7 @@ section[id]{ scroll-margin-top: 84px; }
   padding:4px 9px; border:1px solid var(--rule); border-radius:2px;
   color:var(--fg-dim);
 }
-.chips--dark li{ border-color:#22323F; }
+.chips--dark li{ border-color:#22402D; }
 
 /* ============================================================
    SELECTED WORK
@@ -361,7 +409,7 @@ section[id]{ scroll-margin-top: 84px; }
 .cell--lead{
   grid-column:span 2; grid-row:span 2;
   background:
-    linear-gradient(160deg, rgba(255,63,154,.07), rgba(4,8,14,0) 55%),
+    linear-gradient(160deg, rgba(255,182,39,.07), rgba(4,18,11,0) 55%),
     var(--cell-bg);
   display:flex; flex-direction:column;
 }
@@ -442,7 +490,7 @@ section[id]{ scroll-margin-top: 84px; }
 .courses li{
   border:1px solid var(--rule-d); border-radius:2px;
   padding:9px 14px; color:var(--dim-d);
-  background: rgba(4,8,14,.65);
+  background: rgba(4,18,11,.7);
   font-size:.74rem;
 }
 
@@ -474,13 +522,46 @@ section[id]{ scroll-margin-top: 84px; }
 .honors b{ font-weight:600; font-size:1rem; }
 .honors span{ color:var(--fg-dim); font-size:.92rem; }
 
+/* ---------- JAYLANY doorway ---------- */
+.door{
+  display:block; max-width:660px;
+  padding:clamp(34px,4vw,54px) clamp(28px,3.5vw,48px);
+  border:1px solid var(--rule);
+  transition:border-color .2s ease;
+}
+.door:hover{ border-color:var(--acc); }
+.door__mark{ display:inline-flex; align-items:baseline; gap:.34em; }
+.door__mir{
+  font-family:'Newsreader', Georgia, serif; font-style:italic; font-weight:300;
+  font-size:clamp(1.5rem,2.4vw,2rem);
+}
+.door__name{
+  font-weight:600; letter-spacing:.2em;
+  font-size:clamp(1.45rem,2.3vw,1.9rem);
+}
+.door__tag{
+  display:block; margin-top:12px; color:var(--fg-dim);
+  font-family:'Newsreader', Georgia, serif; font-style:italic;
+  font-size:1.05rem;
+}
+.door__body{
+  display:block; margin-top:24px; padding-top:22px;
+  border-top:1px solid var(--rule);
+  color:var(--fg-dim); font-size:.95rem; max-width:52ch;
+}
+.door__go{
+  display:inline-block; margin-top:22px; color:var(--acc);
+  font-family:var(--code); font-size:.72rem; letter-spacing:.06em;
+  border-bottom:1px solid currentColor; padding-bottom:2px;
+}
+
 /* ============================================================
    CONTACT + FOOT
    ============================================================ */
 
 .contact__in{
   display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
-  gap: clamp(34px,5vw,80px); align-items:end;
+  gap: clamp(34px,5vw,80px); align-items:start;
 }
 .contact__acts{ display:grid; gap:10px; justify-items:stretch; }
 .setup{
@@ -510,6 +591,7 @@ section[id]{ scroll-margin-top: 84px; }
   .impact{ grid-template-columns:repeat(3,minmax(0,1fr)); }
   .grid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .caps{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .quotes{ grid-template-columns:1fr; }
 }
 
 @media (max-width: 820px){
@@ -544,7 +626,8 @@ section[id]{ scroll-margin-top: 84px; }
   .scope__plot{ max-width:280px; margin-inline:auto; }
 
   .impact{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .grid, .caps{ grid-template-columns:1fr; }
+  .grid, .caps, .quotes{ grid-template-columns:1fr; }
+  .facts div{ grid-template-columns:96px minmax(0,1fr); gap:12px; }
   .cell--lead{ grid-column:span 1; grid-row:span 1; }
   .cell--lead .chips{ margin-top:22px; }
   .degrees{ grid-template-columns:1fr; }
